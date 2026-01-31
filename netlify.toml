@@ -1,21 +1,24 @@
-# 适配 Next.js 15.2.4 的 Netlify 配置（纯英文，语法合规）
+# 适配 Next.js 15.2.4 的 Netlify 配置（无中文、语法合规）
 [build]
+  # 构建命令：强制安装依赖 + 构建
   command = "npm install --force && npm run build"
+  # Next.js 构建输出目录
   publish = ".next"
+  # 指定 Node/NPM 版本（适配 Next.js 15.x）
   environment = { NODE_VERSION = "20.x", NPM_VERSION = "10.x" }
 
-# 适配 Next.js 15.x 的 Netlify 插件
+# Next.js 15.x 适配的 Netlify 插件
 [[plugins]]
   package = "@netlify/plugin-nextjs"
   version = "6.0.0"
 
-# 解决 Next.js 路由刷新 404 问题（简化版，避免解析错误）
+# 解决 Next.js 路由刷新 404 问题
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# 修复图片优化路由（纯英文，无中文）
+# 图片优化路由（纯英文，无中文/中文标点）
 [[redirects]]
   from = "/_ipx/*"
   to = "/.netlify/images?url=:url&w=:width&q=:quality"

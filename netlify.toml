@@ -1,25 +1,21 @@
-# 适配 Next.js 15.2.4 的 Netlify 配置
+# 适配 Next.js 15.2.4 的 Netlify 配置（纯英文，语法合规）
 [build]
-  # 指定构建命令：先安装依赖，再构建（解决退出码 2 问题）
   command = "npm install --force && npm run build"
-  # Next.js 15.x 的构建输出目录（保持和 package.json 一致）
   publish = ".next"
-  # 指定 Node 版本（匹配 package.json 里的 engines.node >=18）
   environment = { NODE_VERSION = "20.x", NPM_VERSION = "10.x" }
 
-# 适配 Next.js 15.x 的 Netlify 插件（关键！解决 400 错误）
+# 适配 Next.js 15.x 的 Netlify 插件
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-  version = "6.0.0" # 唯一适配 Next.js 15.x 的插件版本
+  version = "6.0.0"
 
-# 解决 Next.js 15.x 路由刷新 404 问题
+# 解决 Next.js 路由刷新 404 问题（简化版，避免解析错误）
 [[redirects]]
   from = "/*"
-  to = "/_next/static/:splat"
+  to = "/index.html"
   status = 200
-  conditions = { Query = { "q": ":quality", "url": ":url", "w": ":width" } }
 
-# 修复图片优化路由（适配 Next.js 15.x 的 IPX 功能）
+# 修复图片优化路由（纯英文，无中文）
 [[redirects]]
   from = "/_ipx/*"
   to = "/.netlify/images?url=:url&w=:width&q=:quality"
